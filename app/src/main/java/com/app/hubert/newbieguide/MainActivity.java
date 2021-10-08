@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -93,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
                         GuidePage.newInstance()//创建一个实例
                                 .addHighLight(button)//添加高亮的view
                                 .addHighLight(tvBottom,
-                                        new RelativeGuide(R.layout.view_relative_guide, Gravity.TOP, 100) {
+                                        new RelativeGuide(LayoutInflater.from(MainActivity.this).inflate(R.layout.view_relative_guide,((ViewGroup)MainActivity.this.getWindow().getDecorView()),false),
+                                                Gravity.TOP, 100) {
                                             @Override
                                             protected void offsetMargin(MarginInfo marginInfo, ViewGroup viewGroup, View view) {
                                                 marginInfo.leftMargin += 100;

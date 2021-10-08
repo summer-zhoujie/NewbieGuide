@@ -27,6 +27,7 @@ public class GuidePage {
     private int backgroundColor;
 
     private int layoutResId;
+    private View layoutResView;
     private int[] clickToDismissIds;
     private OnLayoutInflatedListener onLayoutInflatedListener;
     private OnHighlightDrewListener onHighlightDrewListener;
@@ -170,6 +171,17 @@ public class GuidePage {
         return this;
     }
 
+    /**
+     * 添加引导层布局
+     *
+     * @param resId 布局id
+     * @param id    布局中点击消失引导页的控件id
+     */
+    public GuidePage setLayoutView(View resView) {
+        this.layoutResView = resView;
+        return this;
+    }
+
     public GuidePage setEverywhereCancelable(boolean everywhereCancelable) {
         this.everywhereCancelable = everywhereCancelable;
         return this;
@@ -214,7 +226,7 @@ public class GuidePage {
     }
 
     public boolean isEmpty() {
-        return layoutResId == 0 && highLights.size() == 0;
+        return layoutResId == 0 && highLights.size() == 0 && layoutResView == null;
     }
 
     public List<HighLight> getHighLights() {
@@ -227,6 +239,10 @@ public class GuidePage {
 
     public int getLayoutResId() {
         return layoutResId;
+    }
+
+    public View getLayoutResView() {
+        return layoutResView;
     }
 
     public int[] getClickToDismissIds() {

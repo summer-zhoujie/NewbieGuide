@@ -49,11 +49,17 @@ public class RelativeGuide {
     public HighLight highLight;
     @LayoutRes
     public int layout;
+    public View layoutView;
     public int padding;
     public int gravity;
 
     public RelativeGuide(@LayoutRes int layout, @LimitGravity int gravity) {
         this.layout = layout;
+        this.gravity = gravity;
+    }
+
+    public RelativeGuide(View layoutView, @LimitGravity int gravity) {
+        this.layoutView = layoutView;
         this.gravity = gravity;
     }
 
@@ -68,8 +74,19 @@ public class RelativeGuide {
         this.padding = padding;
     }
 
+    public RelativeGuide(View layoutView, @LimitGravity int gravity, int padding) {
+        this.layoutView = layoutView;
+        this.gravity = gravity;
+        this.padding = padding;
+    }
+
     public final View getGuideLayout(ViewGroup viewGroup, Controller controller) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(layout, viewGroup, false);
+        View view = layoutView;
+        if (view == null && layout == 0) {
+            return null;
+        } else if (view == null) {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(layout, viewGroup, false);
+        }
         onLayoutInflated(view);
         onLayoutInflated(view, controller);
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) view.getLayoutParams();

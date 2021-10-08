@@ -9,7 +9,9 @@ import android.support.annotation.IntDef;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +48,7 @@ public class FirstActivity extends AppCompatActivity {
                         .addGuidePage(GuidePage.newInstance()
                                 .addHighLight(btnSimple)
                                 .addHighLight(new RectF(0, 800, 200, 1200))
-                                .setLayoutRes(R.layout.view_guide_simple))
+                                .setLayoutView(LayoutInflater.from(FirstActivity.this).inflate(R.layout.view_guide_simple, ((ViewGroup) FirstActivity.this.getWindow().getDecorView()), false)))
                         .show();
             }
         });

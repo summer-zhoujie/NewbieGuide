@@ -220,6 +220,31 @@ public class GuideLayout extends FrameLayout {
                 inflatedListener.onLayoutInflated(view, controller);
             }
             addView(view, params);
+        } else if (guidePage.getLayoutResView() != null) {
+            View view = guidePage.getLayoutResView();
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            int[] viewIds = guidePage.getClickToDismissIds();
+            if (viewIds != null && viewIds.length > 0) {
+                for (int viewId : viewIds) {
+                    View click = view.findViewById(viewId);
+                    if (click != null) {
+                        click.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                remove();
+                            }
+                        });
+                    } else {
+                        Log.w(NewbieGuide.TAG, "can't find the view by id : " + viewId + " which used to remove guide page");
+                    }
+                }
+            }
+            OnLayoutInflatedListener inflatedListener = guidePage.getOnLayoutInflatedListener();
+            if (inflatedListener != null) {
+                inflatedListener.onLayoutInflated(view, controller);
+            }
+            addView(view, params);
         }
         List<RelativeGuide> relativeGuides = guidePage.getRelativeGuides();
         if (relativeGuides.size() > 0) {
