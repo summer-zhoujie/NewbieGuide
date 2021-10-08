@@ -34,7 +34,10 @@ public class ViewUtils {
             child.getHitRect(result);
             return result;
         }
-        while (tmp != decorView && tmp != parent) {
+        while ( tmp != decorView && tmp != parent) {
+            if (!(tmp.getParent() instanceof View)) {
+                break;
+            }
             LogUtil.i("tmp class:" + tmp.getClass().getSimpleName());
             tmp.getHitRect(tmpRect);
             LogUtil.i("tmp hit Rect:" + tmpRect);
